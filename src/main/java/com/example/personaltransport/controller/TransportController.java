@@ -19,22 +19,19 @@ public class TransportController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping("/{start}/{end}/{transportType}")
-    public List<Route> getRoutes(@PathVariable String start, @PathVariable String end, @PathVariable String transportType ){
+    @GetMapping("/{start}/{end}")
+    public List<Route> getBusRoutes(@PathVariable String start, @PathVariable String end){
         RouteObj routeList = restTemplate.getForObject(
                 "https://transport-routes.azurewebsites.net/api/v1/route/"
-                        + start + "/" + end + "/" + transportType + " ", RouteObj.class);
-
-        return routeList.getRoutes();
-    }
+                        + start + " bus" + "/" + end + " bus", RouteObj.class);
 
   /*  @GetMapping("/{transportType}")
     public List<Route> getCarRoutes(@PathVariable String transportType){
         RouteObj routeList = restTemplate.getForObject(
                 "https://transport-routes.azurewebsites.net/api/v1/route/"
                         + transportType + "/", RouteObj.class);
-
+*/
         return routeList.getRoutes();
     }
-*/
+
 }
