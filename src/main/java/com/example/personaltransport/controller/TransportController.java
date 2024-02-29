@@ -13,21 +13,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/personaltransport2")
+
 public class TransportController {
 
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping("/{start}/{end}")
-    public List<Route> getBusRoutes(@PathVariable String start, @PathVariable String end){
+    @GetMapping("/{start}/{end}/{transportType}")
+    public List<Route> getRoutes(@PathVariable String start, @PathVariable String end, @PathVariable String transportType ){
         RouteObj routeList = restTemplate.getForObject(
                 "https://transport-routes.azurewebsites.net/api/v1/route/"
-                        + start + "/" + end + "", RouteObj.class);
+                        + start + "/" + end + "/" + transportType + " ", RouteObj.class);
 
         return routeList.getRoutes();
     }
 
-    @GetMapping("/{transportType}")
+  /*  @GetMapping("/{transportType}")
     public List<Route> getCarRoutes(@PathVariable String transportType){
         RouteObj routeList = restTemplate.getForObject(
                 "https://transport-routes.azurewebsites.net/api/v1/route/"
@@ -35,5 +36,5 @@ public class TransportController {
 
         return routeList.getRoutes();
     }
-
+*/
 }
