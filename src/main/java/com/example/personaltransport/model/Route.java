@@ -11,5 +11,7 @@ public class Route {
     private Long id;
     String start;
     String end;
+    String transportType;
     int time;
+
 }

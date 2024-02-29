@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/public-transport")
+@RequestMapping("/api/v1/personaltransport2")
 public class TransportController {
 
     @Autowired
@@ -22,8 +22,18 @@ public class TransportController {
     public List<Route> getBusRoutes(@PathVariable String start, @PathVariable String end){
         RouteObj routeList = restTemplate.getForObject(
                 "https://transport-routes.azurewebsites.net/api/v1/route/"
-                        + start + "%20bus/" + end + "%20bus", RouteObj.class);
+                        + start + "/" + end + "", RouteObj.class);
 
         return routeList.getRoutes();
     }
+
+    @GetMapping("/{transportType}")
+    public List<Route> getCarRoutes(@PathVariable String transportType){
+        RouteObj routeList = restTemplate.getForObject(
+                "https://transport-routes.azurewebsites.net/api/v1/route/"
+                        + transportType + "/", RouteObj.class);
+
+        return routeList.getRoutes();
+    }
+
 }
