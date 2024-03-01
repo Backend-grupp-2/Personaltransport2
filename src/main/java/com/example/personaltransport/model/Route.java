@@ -12,6 +12,6 @@ public class Route {
     String start;
     String end;
     String transportType;
-    int time;
+    int commuteTime;
 
 }
