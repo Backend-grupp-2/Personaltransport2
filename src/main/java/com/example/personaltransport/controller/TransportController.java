@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/personaltransport2")
-
 public class TransportController {
 
     @Autowired
@@ -21,30 +20,28 @@ public class TransportController {
 
     @GetMapping("/route/{start}/{end}/{transportType}")
     public List<Route> getBusRoutes(@PathVariable String start, @PathVariable String end, @PathVariable String transportType) {
-        String url = "https://transport-routes.azurewebsites.net/api/v1/transportroutes/" + start + "/" + end + "/" + transportType;
+        String url = "http://localhost:8081/api/v1/transportroutes/route/" + start + "/" + end + "/" + transportType;
         RouteObj routeList = restTemplate.getForObject(url, RouteObj.class);
         return routeList.getRoutes();
-
     }
+
     @GetMapping("/route/{transportType}")
     public List<Route> getCarRoutes(@PathVariable String transportType){
-        String url = "https://transport-routes.azurewebsites.net/api/v1/transportroutes/" + transportType;
+        String url = "http://localhost:8081/api/v1/transportroutesgithub/route/" + transportType;
         RouteObj routeList = restTemplate.getForObject(url, RouteObj.class);
         return routeList.getRoutes();
     }
 
     @GetMapping("/route/end/{end}")
     public List<Route> getBusRoutesFromStation(@PathVariable String end) {
-        String url = "https://transport-routes.azurewebsites.net/api/v1/transportroutes/end/" + end;
+        String url = "http://localhost:8081/api/v1/transportroutesgithub/route/end/" + end;
         RouteObj routeList = restTemplate.getForObject(url, RouteObj.class);
         return routeList.getRoutes();
     }
 
     @GetMapping("/route/save/{id}")
     public Route saveRoute(@PathVariable Long id) {
-        String url = "https://transport-routes.azurewebsites.net/api/v1/transportroutes/save/" + id;
+        String url = "http://localhost:8081/api/v1/transportroutesgithub/route/save/" + id;
         return restTemplate.getForObject(url, Route.class);
     }
-
 }
-
