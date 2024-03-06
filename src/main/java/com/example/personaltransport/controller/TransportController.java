@@ -18,6 +18,12 @@ public class TransportController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @GetMapping
+    public String message(){
+        return "your app has deployed";
+    }
+
+
     @GetMapping("/route/{start}/{end}/{transportType}")
     public List<Route> getBusRoutes(@PathVariable String start, @PathVariable String end, @PathVariable String transportType) {
         String url = "https://routesgithub.azurewebsites.net/route/" + start + "/" + end + "/" + transportType;
